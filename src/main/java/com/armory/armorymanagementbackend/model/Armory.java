@@ -11,17 +11,29 @@ public class Armory {
     @Column(name = "id", nullable = false) // Applies the Not Null constraint to this column.
     private Long id;
 
-    @Column(name = "type_title")
-    private String type_title;
+    @Column(name = "weapon_category")
+    private String weapon_category;
 
-    @Column(name = "type_category")
-    private String type_category;
+    @Column(name = "weapon_specs")
+    private String weapon_specs;
+
+    @Column(name = "assigned_to")
+    private String assigned_to;
+
+    @Column(name = "assigned_staff_badge_number")
+    private String assigned_staff_badge_number;
 
     @Column(name = "barcode")
     private String barcode;
 
-    @Column(name = "assigned_to")
-    private String assigned_to;
+    @Column(name = "isIssued")
+    private Boolean isIssued;
+
+    @Column(name = "date_issued")
+    private String date_issued;
+
+    @Column(name = "date_returned")
+    private String date_returned;
 
     @Column(name = "rfid")
     private String rfid;
@@ -29,37 +41,26 @@ public class Armory {
     @Column(name = "location")
     private String location;
 
-    @Column(name = "description")
-    private String description;
-
-    @Column(name = "issued")
-    private Boolean issued;
-
-    @Column(name = "date_issued")
-    private String date_issued;
-
-    @Column(name = "created_at")
-    private String created_at;
-
     // Default Constructor
     public Armory() {
     }
 
     // Constructor
-    public Armory(String type_title, String type_category, String barcode, String assigned_to, String rfid, String location, String description, Boolean issued, String date_issued, String created_at) {
-        this.type_title = type_title;
-        this.type_category = type_category;
-        this.barcode = barcode;
+    public Armory(String weapon_category, String weapon_specs, String assigned_to, String assigned_staff_badge_number, String barcode, Boolean is_issued, String date_issued, String date_returned, String rfid, String location) {
+        this.weapon_category = weapon_category;
+        this.weapon_specs = weapon_specs;
         this.assigned_to = assigned_to;
+        this.assigned_staff_badge_number = assigned_staff_badge_number;
+        this.barcode = barcode;
+        this.isIssued = isIssued;
+        this.date_issued = date_issued;
+        this.date_returned = date_returned;
         this.rfid = rfid;
         this.location = location;
-        this.description = description;
-        this.issued = issued;
-        this.date_issued = date_issued;
-        this.created_at = created_at;
     }
 
-    // Getters and Setters
+   // getters and setters
+
     public Long getId() {
         return id;
     }
@@ -68,20 +69,36 @@ public class Armory {
         this.id = id;
     }
 
-    public String getType_title() {
-        return type_title;
+    public String getWeapon_category() {
+        return weapon_category;
     }
 
-    public void setType_title(String type_title) {
-        this.type_title = type_title;
+    public void setWeapon_category(String weapon_category) {
+        this.weapon_category = weapon_category;
     }
 
-    public String getType_category() {
-        return type_category;
+    public String getWeapon_specs() {
+        return weapon_specs;
     }
 
-    public void setType_category(String type_category) {
-        this.type_category = type_category;
+    public void setWeapon_specs(String weapon_specs) {
+        this.weapon_specs = weapon_specs;
+    }
+
+    public String getAssigned_to() {
+        return assigned_to;
+    }
+
+    public void setAssigned_to(String assigned_to) {
+        this.assigned_to = assigned_to;
+    }
+
+    public String getAssigned_staff_badge_number() {
+        return assigned_staff_badge_number;
+    }
+
+    public void setAssigned_staff_badge_number(String assigned_staff_badge_number) {
+        this.assigned_staff_badge_number = assigned_staff_badge_number;
     }
 
     public String getBarcode() {
@@ -92,12 +109,28 @@ public class Armory {
         this.barcode = barcode;
     }
 
-    public String getAssigned_to() {
-        return assigned_to;
+    public Boolean getIs_issued() {
+        return isIssued;
     }
 
-    public void setAssigned_to(String assigned_to) {
-        this.assigned_to = assigned_to;
+    public void setIs_issued(Boolean isIssued) {
+        this.isIssued = isIssued;
+    }
+
+    public String getDate_issued() {
+        return date_issued;
+    }
+
+    public void setDate_issued(String date_issued) {
+        this.date_issued = date_issued;
+    }
+
+    public String getDate_returned() {
+        return date_returned;
+    }
+
+    public void setDate_returned(String date_returned) {
+        this.date_returned = date_returned;
     }
 
     public String getRfid() {
@@ -116,53 +149,22 @@ public class Armory {
         this.location = location;
     }
 
-    public String getDescription() {
-        return description;
-    }
+    //override methods
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Boolean getIssued() {
-        return issued;
-    }
-
-    public void setIssued(Boolean issued) {
-        this.issued = issued;
-    }
-
-    public String getDate_issued() {
-        return date_issued;
-    }
-
-    public void setDate_issued(String date_issued) {
-        this.date_issued = date_issued;
-    }
-
-    public String getCreated_at() {
-        return created_at;
-    }
-
-    public void setCreated_at(String created_at) {
-        this.created_at = created_at;
-    }
-
-    // Override Methods
     @Override
     public String toString() {
         return "Armory{" +
                 "id=" + id +
-                ", type_title='" + type_title + '\'' +
-                ", type_category='" + type_category + '\'' +
-                ", barcode='" + barcode + '\'' +
+                ", weapon_category='" + weapon_category + '\'' +
+                ", weapon_specs='" + weapon_specs + '\'' +
                 ", assigned_to='" + assigned_to + '\'' +
+                ", assigned_staff_badge_number='" + assigned_staff_badge_number + '\'' +
+                ", barcode='" + barcode + '\'' +
+                ", isIssued=" + isIssued +
+                ", date_issued='" + date_issued + '\'' +
+                ", date_returned='" + date_returned + '\'' +
                 ", rfid='" + rfid + '\'' +
                 ", location='" + location + '\'' +
-                ", description='" + description + '\'' +
-                ", issued=" + issued +
-                ", date_issued='" + date_issued + '\'' +
-                ", created_at='" + created_at + '\'' +
                 '}';
     }
 }

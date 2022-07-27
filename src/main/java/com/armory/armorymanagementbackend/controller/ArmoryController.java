@@ -55,7 +55,7 @@ public class ArmoryController {
     public ResponseEntity<Armory> createArmory(@RequestBody Armory armory) {
         try {
             Armory _armory = armoryRepository
-                    .save(new Armory(armory.getType_title(), armory.getType_category(), armory.getBarcode(), armory.getAssigned_to(), armory.getRfid(), armory.getLocation(), armory.getDescription(), armory.getIssued(), armory.getDate_issued(), armory.getCreated_at()));
+                    .save(new Armory(armory.getWeapon_category(), armory.getWeapon_specs(), armory.getAssigned_to(), armory.getAssigned_staff_badge_number(), armory.getBarcode(), armory.getIs_issued(), armory.getDate_issued(), armory.getDate_returned(), armory.getRfid(), armory.getLocation()));
             return new ResponseEntity<>(_armory, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -68,16 +68,18 @@ public class ArmoryController {
 
         if (armoryData.isPresent()) {
             Armory _armory = armoryData.get();
-            _armory.setType_title(armory.getType_title());
-            _armory.setType_category(armory.getType_category());
-            _armory.setBarcode(armory.getBarcode());
+            _armory.setWeapon_category(armory.getWeapon_category());
+            _armory.setWeapon_specs(armory.getWeapon_specs());
             _armory.setAssigned_to(armory.getAssigned_to());
+            _armory.setAssigned_staff_badge_number(armory.getAssigned_staff_badge_number());
+            _armory.setBarcode(armory.getBarcode());
+            _armory.setIs_issued(armory.getIs_issued());
+            _armory.setDate_issued(armory.getDate_issued());
+            _armory.setDate_returned(armory.getDate_returned());
+            _armory.setDate_issued(armory.getDate_issued());
             _armory.setRfid(armory.getRfid());
             _armory.setLocation(armory.getLocation());
-            _armory.setDescription(armory.getDescription());
-            _armory.setIssued(armory.getIssued());
-            _armory.setDate_issued(armory.getDate_issued());
-            _armory.setCreated_at(armory.getCreated_at());
+
 
             return new ResponseEntity<>(armoryRepository.save(_armory), HttpStatus.OK);
         } else {
@@ -107,9 +109,9 @@ public class ArmoryController {
     }
 
     @GetMapping("/armories/issued")
-    public ResponseEntity<List<Armory>> findByIssued() {
+    public ResponseEntity<List<Armory>> findByIsIssued() {
         try {
-            List<Armory> armories = armoryRepository.findByIssued(true);
+            List<Armory> armories = armoryRepository.findByIsIssued(true);
 
             if (armories.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
